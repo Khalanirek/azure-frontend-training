@@ -16,11 +16,11 @@
                 if (!response.ok) {
                     throw new Error(`Błąd HTTP: ${response.status}`);
                 }
-                return response.body; // Parsowanie odpowiedzi JSON
+                return response.text(); // Parsowanie odpowiedzi JSON
             })
             .then(data => {
                 // Wyświetlenie wyniku na stronie
-                document.getElementById('result').textContent = data.toLocaleString()
+                document.getElementById('result').textContent = data;
             })
             .catch(error => {
                 // Obsługa błędów
