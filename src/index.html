@@ -5,6 +5,28 @@
     <title>Title</title>
 </head>
 <body>
-Hello World!
+<h1>Wynik zapytania do API</h1>
+<div id="result">Ładowanie danych...</div>
+
+<script>
+    // Funkcja do automatycznego wykonania zapytania po załadowaniu strony
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch("https://pt-code-app.azurewebsites.net/test") // Zastąp URL swoim API
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Błąd HTTP: ${response.status}`);
+                }
+                return response.json(); // Parsowanie odpowiedzi JSON
+            })
+            .then(data => {
+                // Wyświetlenie wyniku na stronie
+                document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                // Obsługa błędów
+                document.getElementById('result').textContent = `Błąd: ${error.message}`;
+            });
+    });
+</script>
 </body>
 </html>
